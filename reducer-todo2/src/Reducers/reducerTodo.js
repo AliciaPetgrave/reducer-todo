@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 
 export const initialState = {
     item: '',
@@ -8,7 +8,21 @@ export const initialState = {
 
 export const reducerTodo = (state, action) => {
     switch(action.type){
-        
-        default: return state;     
+        case "ADD_TODO":
+            return [...state,
+                {
+                    item: action.item,
+                    completed: false,
+                    id: action.id
+                }
+            ]
+        case "TOGGLE_COMPLETED":
+            return {
+                ...state,
+                completed: !state.completed
+            }  
+        case "CLEAR":
+            return state.filter(task => !task.completed);
+        default: return state     
     }
 }
