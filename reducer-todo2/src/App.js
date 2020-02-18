@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import TodoForm from './Components/todoForm'
+import TodoForm from './Components/TodoForm'
 
 function App() {
   return (

@@ -1,5 +1,6 @@
 import React, {useState, useReducer} from 'react'
 import {initialState, reducerTodo} from '../Reducers/reducerTodo'
+import Todos from './Todos'
 
 
 const TodoForm = () => {
@@ -10,6 +11,18 @@ const TodoForm = () => {
         setNewTodo(e.target.value)
     }
 
+    const handleSubmit = e => {
+        e.preventDefault();
+        dispatch({type: 'ADD_TODO', payload: newTodo})
+        console.log(newTodo)
+    }
+
+    const handleClear = e => {
+        e.preventDefault();
+        dispatch({type: "CLEAR"});
+        
+    }
+
 
         return (
             <div>
@@ -17,17 +30,23 @@ const TodoForm = () => {
                     <input
                     type="text"
                     placeholder="Add Todo"
+                    name="newTodo"
                     value={newTodo}
                     onChange={handleChanges}></input>
 
                     <button
                     type="submit"
-                    onClick={() => dispatch({type: 'ADD_TODO'})}>Add</button>
+                    onClick={handleSubmit}>Add</button>
 
                     <button
                     type="submit"
-                    onClick={() => dispatch({type: "CLEAR"})}>Clear Completed</button>
+                    onClick={handleClear}>Clear Completed</button>
                 </form>
+             <Todos 
+             state={state}
+             dispatch={dispatch}
+             id={state.id} 
+             newTodo={newTodo}/>
             </div>
         )
     
